@@ -196,7 +196,195 @@ a { color: inherit; text-decoration: none; }
   z-index: 10;
 }
 </style>
+</head><!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公告</title>
+    <style>
+        /* 全局点击效果优化 */
+        *{
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+        *:focus{
+            outline: none !important;
+        }
+
+        /* 禁止长按选择文字 */
+        body, html {
+            user-select: none; /* 禁止选择 */
+            -webkit-user-select: none; /* 兼容 Safari */
+            -moz-user-select: none; /* 兼容 Firefox */
+            -ms-user-select: none; /* 兼容 IE/Edge */
+        }
+
+        /* ===== MD3 基础配色 ===== */
+        :root {
+            --md-primary: #6750A4;
+            --md-on-primary: #FFFFFF;
+            --md-surface: #FFFBFE;
+            --md-outline: #79747E;
+            --md-shadow: rgba(0, 0, 0, 0.25);
+            --md-surface-variant: #E7E0EC;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: transparent;  /* 初始背景为透明 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            transition: background-color 0.3s ease;  /* 渐变过渡效果 */
+        }
+
+        /* ===== MD3 卡片 ===== */
+        .md3-card {
+            width: 80%;           /* 占 body 宽度的 85% */
+            max-width: 360px;     /* 最大宽度限制 */
+            padding: 24px 24px 16px;
+            border-radius: 28px;
+            background: var(--md-surface);
+            box-shadow:
+                0 2px 6px var(--md-shadow),
+                0 1px 3px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            text-align: left;
+        }
+
+        /* 横屏适配：避免卡片太宽 */
+        @media (orientation: landscape) {
+            .md3-card {
+                width: 70%;        /* 横屏时缩小比例 */
+                max-width: 360px;  /* 横屏可适当放宽最大宽度 */
+            }
+        }
+
+        /* 顶部图标 */
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+            border: 2px solid var(--md-primary);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .support-chip {
+            display: inline-flex;
+            align-items: center;
+            height: 28px;
+            padding: 0 12px;
+            border-radius: 14px;
+            background: var(--md-surface-variant);
+            border: 1px solid var(--md-outline);
+            font-size: 12px;
+            color: #49454F;
+            letter-spacing: 0.03em;
+        }
+
+        .card-content {
+            font-size: 14px;
+            color: rgba(0,0,0,0.75);
+            line-height: 1.6;
+        }
+
+        /* 按钮 */
+        .card-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .md3-btn {
+            height: 40px;
+            padding: 0 24px;
+            border-radius: 20px;
+            border: none;
+            background: var(--md-primary);
+            color: var(--md-on-primary);
+            font-weight: 600;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        .md3-btn:hover { background: #7355B5; }
+
+        .md3-btn:active::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 10%, transparent 40%);
+            opacity: 1;
+            transform: scale(1.2);
+            transition: 0.25s;
+        }
+    </style>
 </head>
+<body>
+
+    <section class="md3-card">
+        <div class="card-header">
+            <img class="card-icon" id="card-icon" src="" alt="icon">
+            <div class="card-title" id="card-title"></div>
+        </div>
+
+        <div class="support-chip" id="chip"></div>
+
+        <div class="card-content" id="card-content"></div>
+
+        <div class="card-actions">
+            <button class="md3-btn" id="btn-ok">我知道了</button>
+        </div>
+    </section>
+
+    <script>
+        /* 延迟加载半透明背景 */
+        window.addEventListener("load", () => {
+            document.body.style.backgroundColor = "rgba(0,0,0,0.5)";  /* 页面加载完成后设置背景 */
+        });
+
+        /* ===== 配置区 ===== */
+        const config = {
+            icon: "https://p2.ssl.qhimgs1.com/t04cc685f3b4e4323f2.jpg",
+            title: "系统公告",
+            tag: "重要通知",
+            content: `
+                三星最强野蛆违背大帝, 反差届的一片天, 在三星以靠着巴结为生
+            `
+        };
+
+        /* 动态填充 */
+        document.getElementById("card-icon").src = config.icon;
+        document.getElementById("card-title").innerHTML = config.title;
+        document.getElementById("chip").innerHTML = config.tag;
+        document.getElementById("card-content").innerHTML = config.content;
+
+        /* 按钮事件 */
+        document.getElementById("btn-ok").addEventListener("click", () => {
+            if (window.Android && window.Android.close) {
+                window.Android.close('{#id#}');
+            }
+        });
+    </script>
+
+</body>
+</html>
+
 
 <body>
 <div id="logo-bg">SAMSUNG</div>
