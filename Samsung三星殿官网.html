@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>SAMSUNG DARK</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+html, body {
+  background: #0d0d0d;
+  color: #e0e0e0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+
+/* 高亮白色 Samsung LOGO */
+#logo-bg {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20vw;
+  font-weight: 900;
+  color: rgba(255,255,255,0.15);
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 粒子背景 */
+#particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: block !important;
+}
+
+/* 导航 */
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 65px;
+  background: #141414ee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-bottom: 1px solid #222;
+  z-index: 999;
+}
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: #00ccff;
+}
+.menu {
+  display: flex;
+  gap: 24px;
+}
+
+/* 内容 */
+.hero, .section, .footer {
+  position: relative;
+  z-index: 10;
+}
+
+.hero {
+  margin-top: 65px;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+}
+.hero h1 {
+  font-size: clamp(26px, 5vw, 48px);
+  margin-bottom: 16px;
+  color: #fff;
+}
+.hero p {
+  max-width: 700px;
+  font-size: 16px;
+  color: #aaa;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+.btn {
+  padding: 12px 28px;
+  background: #00ccff;
+  color: #000;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+.btn:hover { background: #00aadd; }
+
+.section {
+  padding: 60px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section h2 {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 40px;
+  color: #fff;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+.card {
+  background: #141414dd;
+  border: 1px solid #222;
+  border-radius: 10px;
+  padding: 26px;
+}
+.card h3 {
+  color: #00ccff;
+  margin-bottom: 10px;
+}
+.card p {
+  color: #888;
+  line-height: 1.5;
+}
+
+/* 人物介绍 - 宽高自动适应内容 */
+.members {
+  padding: 40px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+.members h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: #fff;
+}
+.member-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+.member {
+  background: #181818;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 20px 24px;
+  min-width: 220px;
+  max-width: 340px;
+  width: fit-content;
+  height: fit-content;
+}
+.member h3 {
+  color: #00ccff;
+  font-size: 17px;
+  margin-bottom: 6px;
+}
+.member .job {
+  color: #ccc;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+.member .info {
+  color: #999;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.footer {
+  background: #111;
+  border-top: 1px solid #222;
+  text-align: center;
+  padding: 30px 20px;
+  color: #666;
+  font-size: 14px;
+  position: relative;
+  z-index: 10;
+}
+</style>
+</head>
+
+<body>
+<div id="logo-bg">SAMSUNG</div>
+<canvas id="particles"></canvas>
+
+<div class="nav">
+  <div class="logo">SAMSUNG</div>
+  <div class="menu">
+    <a href="#home">首页</a>
+    <a href="#about">关于</a>
+    <a href="#service">特点</a>
+  </div>
+</div>
+
+<section class="hero" id="home">
+  <h1>SAMSUNG 三星殿</h1>
+  <p>后起之秀 | 无人能挡 | 加入即可获得大佬庇护 | </p>
+  <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=SdBhHG9dEd%2FGbXVT9JsZfjOB%2FrPBlokO2KGlKPzKSkBwjSw19iOje6OwiWxbovh1&busi_data=eyJncm91cENvZGUiOiIxMDE1ODE4Njc0IiwidG9rZW4iOiJFcVIrREl3SlNrcVl4d3VKWkVlSzh3djE3d3BIVERFNUcvOFFoQ1NGMXlTby85WkJxQm9hM1kzNnIwTUg0bGhKIiwidWluIjoiMjUxNzU5NDUyNyJ9&data=L0uMkvP_6GXCcC3Xve2DwpAn-yvhLbX0bRr00OJ25VvNlReeqDFjWkoq8H1689z46xTrXNV9_qIDTzti69vxzA&svctype=4&tempid=h5_group_info" class="btn" target="_blank">加入Samsung三星殿</a>
+</section>
+
+<section class="section" id="about">
+  <h2>关于我们</h2>
+  <div style="text-align:center; color:#888; max-width:700px; margin:0 auto;">
+    老牌准T0三星现招贤纳士  早期为天谴正统 每个月按贡献发奖金 且包分配少萝青受对象 传授思路培养能力成为各组织高层 
+  </div>
+</section>
+
+<section class="section" id="service">
+  <h2>Samsung三星</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>三星秩序会</h3>
+      <p>张天泽 胡文豪 熊猫 路明非 江南 尊尚书 郑光祖 柒落 周广贤 暗金 南瓜</p>
+    </div>
+    <div class="card">
+      <h3>公告</h3>
+      <p>暂无</p>
+    </div>
+    <div class="card">
+      <h3>全网资料搜索结果</h3>
+      <p>- 三星：发源于百度贴吧的网络暴力组织，以发表攻击性、恶搞性言论、人肉开盒他人为主要行为。喷系里最大的“山头”，成员多为未成年人，早期靠qq、后来用微信群联络，常因意见不合互相攻击、开盒，甚至比拼迫害能力。
+​
+- 性质：属于网络暴力、人肉搜索，涉嫌违法，会对他人造成严重伤害。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 人物介绍（放在最底部） -->
+<section class="members">
+  <h2>团队介绍</h2>
+  <div class="member-list">
+    <div class="member">
+      <h3>张天泽</h3>
+      <div class="job">三星最大头子 版权人©️</div>
+      <div class="info">能带领三星越级打无数组织  靠着无数的恶俗以及踹门开盒等人肉暴力行为  带领三星成为公认暴力组织之一  三星的最强攻击人物之一  现任灭古高层  圣水代言人  黑神历代  全性历代  梁山历代  政联历代  劫难历代</div>
+    </div>
+    <div class="member">
+      <h3>李相夷</h3>
+      <div class="job">三星历代</div>
+      <div class="info">三星后期之秀  刚到三星就尝试空降  后来能力出众带领三星打战场无败绩  随后被正式录用为三星历代</div>
+    </div>
+  <div class="member">
+      <h3>张子冥</h3>
+      <div class="job">三星历代</div>
+      <div class="info">天津序言·张子冥 三星头号疯狗  三星大将军  贡献无数  人脉滔天  叫无数人帮忙为三星揍死无数野狗  以巴结恶俗喷蛆等关键词而闻名  能力超强  神戴前高层  祖安  秋月  秩序网联老大  灭古  天火盟核心人物</div>
+    </div>   
+  <div class="member">
+      <h3>序言</h3>
+      <div class="job">核心成员</div>
+      <div class="info">河北最老序言 王依明 三星预备老大 七星创始人 月夕会创始人 诛仙老大 黑化老大 藏海花历代 极罪版权人 神域版权 乃是张子冥第一巴结对象</div>
+    </div>
+</section>
+
+<section class="footer">
+  © 2026 SAMSUNG All Rights Reserved
+</section>
+
+<script>
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let w, h;
+let particles = [];
+
+function reset() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+
+class Particle {
+  constructor() {
+    this.x = Math.random() * w;
+    this.y = Math.random() * h;
+    this.size = Math.random() * 2 + 1;
+    this.speedX = Math.random() * 0.5 - 0.25;
+    this.speedY = Math.random() * 0.5 - 0.25;
+    this.color = '#00ccff';
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if (this.x < 0 || this.x > w) this.speedX *= -1;
+    if (this.y < 0 || this.y > h) this.speedY *= -1;
+  }
+  draw() {
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function create() {
+  particles = [];
+  const c = Math.max(60, Math.floor(w / 12));
+  for(let i=0;i<c;i++) particles.push(new Particle());
+}
+
+function line() {
+  for(let a=0;a<particles.length;a++){
+    for(let b=a;b<particles.length;b++){
+      const dx = particles[a].x-particles[b].x;
+      const dy = particles[a].y-particles[b].y;
+      const d = Math.hypot(dx,dy);
+      if(d<100){
+        ctx.strokeStyle = `rgba(0,204,255,${0.2-d/500})`;
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(particles[a].x,particles[a].y);
+        ctx.lineTo(particles[b].x,particles[b].y);
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function anim(){
+  ctx.clearRect(0,0,w,h);
+  particles.forEach(p=>{p.update();p.draw()});
+  line();
+  requestAnimationFrame(anim);
+}
+
+window.addEventListener('resize',()=>{reset();create()});
+reset();
+create();
+anim();
+</script>
+</body>
+</html>
